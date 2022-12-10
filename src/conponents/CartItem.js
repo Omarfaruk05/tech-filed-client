@@ -7,6 +7,9 @@ const CartItem = ({ cartItem }) => {
         <div>
           <img width={"120px"} src={cartItem.image} alt="" />
         </div>
+        <div>
+          <h2 className="text-2xl font-bold">{cartItem.model}</h2>
+        </div>
         <div className="font-semibold text-lg">
           <span>{cartItem.price}</span> X <span>{cartItem.quantity}</span> ={" "}
           <span>{cartItem.price * cartItem.quantity}</span>

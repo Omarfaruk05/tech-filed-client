@@ -41,12 +41,21 @@ const Nav = () => {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <div
               className="block md:hidden"
               onClick={() => setShowSearch(!showSearch)}
             >
               <MagnifyingGlassIcon className="w-6 h-6 text-white cursor-pointer"></MagnifyingGlassIcon>
+            </div>
+            {/* reading history  */}
+            <div>
+              <Link
+                to={"reading-history"}
+                className="btn btn-sm text-xs btn-secondary"
+              >
+                Reading History
+              </Link>
             </div>
             <UserCircleIcon className="w-6 h-6 text-white cursor-pointer"></UserCircleIcon>
             <HeartIcon className="w-6 h-6 text-white cursor-pointer"></HeartIcon>
