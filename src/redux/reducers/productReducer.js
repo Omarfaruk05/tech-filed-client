@@ -1,5 +1,7 @@
 import {
+  ADD_CONTENT,
   ADD_TO_CART,
+  DELETE_CONTENT,
   GET_CONTENT,
   READING_HISTORY,
 } from "../actionTyps/actionTyps";
@@ -30,6 +32,12 @@ const productReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
+    case ADD_CONTENT:
+      console.log(action.payload);
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
     case ADD_TO_CART:
       if (mathcCartProduct) {
         mathcCartProduct.quantity = mathcCartProduct.quantity + 1;
@@ -56,6 +64,13 @@ const productReducer = (state = initialState, action) => {
           readingHistory: [action.payload, ...state.readingHistory],
         };
       }
+    case DELETE_CONTENT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product._id !== action.payload
+        ),
+      };
 
     default:
       return state;

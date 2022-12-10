@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import dashboard from "../assects/layout.png";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
@@ -14,7 +15,7 @@ const Nav = () => {
   const cartItem = useSelector((state) => state.product.cart);
   console.log(cartItem);
   return (
-    <div className="bg-slate-800 sticky top-0">
+    <div className="bg-slate-800 sticky top-0 z-30">
       <div className="mx-auto p-3 max-w-7xl">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
@@ -58,7 +59,13 @@ const Nav = () => {
               </Link>
             </div>
             <UserCircleIcon className="w-6 h-6 text-white cursor-pointer"></UserCircleIcon>
-            <HeartIcon className="w-6 h-6 text-white cursor-pointer"></HeartIcon>
+            <Link to={"/dashboard"}>
+              <div className="mt-2">
+                <div className="tooltip tooltip-bottom" data-tip="Dashboard">
+                  <img width={"20px"} src={dashboard} alt="" />
+                </div>
+              </div>
+            </Link>
             <Link to={"cart"}>
               <div className="relative">
                 <div className="text-center text-xs bg-red-500 text-white rounded-full h-4 w-4 absolute -top-2 -right-2">
