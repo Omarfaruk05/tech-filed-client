@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { addToCart, addToReadingHistory } from "../redux/actions/productAction";
 
 const Product = ({ product }) => {
-  console.log(product.status);
   const dispatch = useDispatch();
   return (
     <div>

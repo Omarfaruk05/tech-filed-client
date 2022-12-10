@@ -6,12 +6,10 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { toggleBrand, toggleStock } from "../../redux/actions/filterAction";
 
 const Products = () => {
-  const [assending, setAssending] = useState(false);
-  const [dessending, setdessending] = useState(true);
+  const [update, setUpdate] = useState("");
   const products = useSelector((state) => state.product.products);
   const filter = useSelector((state) => state.filter.filters);
   const { brands, stock } = filter;
-  console.log(stock);
   const dispatch = useDispatch();
 
   const activClasses = "btn-primary text-white";
@@ -26,6 +24,9 @@ const Products = () => {
       <Product product={product} key={product._id}></Product>
     ));
   }
+  const handleChange = (e) => {
+    setUpdate(e.target.value);
+  };
 
   if (products.length && (stock || brands.length)) {
     content = products
@@ -45,6 +46,28 @@ const Products = () => {
         <Product product={product} key={product._id}></Product>
       ));
   }
+  if (update === "firstUpload") {
+    content = products
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .map((product) => (
+        <Product product={product} key={product._id}></Product>
+      ));
+  }
+  if (update === "lastUpload") {
+    content = products
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .map((product) => (
+        <Product product={product} key={product._id}></Product>
+      ));
+  }
+  if (update === "firstUpload") {
+    content = products
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      .map((product) => (
+        <Product product={product} key={product._id}></Product>
+      ));
+  }
+  console.log(update);
   return (
     <div className="max-w-7xl mx-auto my-4 px-2">
       {/* produc filter  */}
@@ -84,12 +107,24 @@ const Products = () => {
           </div>
         </div>
         <div className="py-1">
-          <select className="uppercase ml-1 px-2 h-full rounded-md -mt-[50px] outline-none">
-            <option className="bg-gray-400" disabled selected>
+          <select
+            onChange={handleChange}
+            className="uppercase ml-1 px-2 h-full rounded-md -mt-[50px] outline-none"
+          >
+            <option
+              defaultValue={null}
+              className="bg-gray-400"
+              disabled
+              selected
+            >
               Srot By
             </option>
-            <option className="uppercase">amd</option>
-            <option className="uppercase">intel</option>
+            <option value={"firstUpload"} className="uppercase">
+              First Upload
+            </option>
+            <option value={"lastUpload"} className="uppercase">
+              Last Upload
+            </option>
           </select>
         </div>
       </div>
