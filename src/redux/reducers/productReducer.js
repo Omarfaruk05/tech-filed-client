@@ -33,7 +33,6 @@ const productReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case ADD_CONTENT:
-      console.log(action.payload);
       return {
         ...state,
         products: [...state.products, action.payload],
