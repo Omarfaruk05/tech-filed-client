@@ -1,16 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addContent, updateContent } from "../redux/actions/productAction";
+import addProduct from "../redux/thunk/products/addProduct";
+import updateProduct from "../redux/thunk/products/updateProduct";
+import Spinner from "./Spinner";
 
 const InputGroup = ({ product }) => {
-  console.log(product);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     const updatedProduct = {
       model: data.model,
+      image: data.image,
       brand: data.brand,
       status: data.status === "true" ? true : false,
       price: data.price,
@@ -22,11 +24,15 @@ const InputGroup = ({ product }) => {
       ],
       spec: [data.spec],
     };
-    console.log(updatedProduct);
-    if (product) dispatch(updateContent(updatedProduct, product._id));
+    if (product !== undefined)
+      dispatch(updateProduct(updatedProduct, product._id, reset));
 
-    if (!product) dispatch(addContent(updatedProduct));
+    if (product === undefined) dispatch(addProduct(updatedProduct, reset));
   };
+
+  if (product.model === undefined) {
+    return <Spinner></Spinner>;
+  }
   return (
     <div className="mt-4">
       <form
@@ -182,7 +188,7 @@ const InputGroup = ({ product }) => {
 
         <div className="flex justify-end mt-8 items-center w-full float-right">
           <button
-            className=" px-4 py-3  bg-indigo-500 rounded-md font-semibold text-white text-lg disabled:bg-gray-500"
+            className=" px-4 py-3  bg-indigo-500 rounded-md font-semibold text-white text-lg btn"
             type="submit"
           >
             Submit

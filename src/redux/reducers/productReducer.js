@@ -4,6 +4,7 @@ import {
   DELETE_CONTENT,
   GET_CONTENT,
   READING_HISTORY,
+  UPDATE_CONTENT,
 } from "../actionTyps/actionTyps";
 
 const initialState = {
@@ -69,6 +70,14 @@ const productReducer = (state = initialState, action) => {
         products: state.products.filter(
           (product) => product._id !== action.payload
         ),
+      };
+    case UPDATE_CONTENT:
+      const oldProduct = state.products.filter(
+        (product) => product._id !== action.payload.id
+      );
+      return {
+        ...state,
+        products: [...oldProduct, action.payload.product],
       };
 
     default:

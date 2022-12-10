@@ -30,12 +30,6 @@ const Dashboard = () => {
                 >
                   Add Product
                 </Link>
-                <Link
-                  to={"update-product"}
-                  className="btn w-full btn-sm btn-secondary mt-2 text-white"
-                >
-                  Update Product
-                </Link>
               </div>
             </div>
           </div>
